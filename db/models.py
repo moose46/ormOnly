@@ -30,6 +30,9 @@ class Track(Base):
 
     id = models.BigAutoField(primary_key=True)
 
+    def __del__(self):
+        pass
+
     def __str__(self):
         return f"{self.id}: {self.name}"
 

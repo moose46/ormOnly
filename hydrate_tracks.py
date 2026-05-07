@@ -1,5 +1,8 @@
 # https://dev.to/ivanyu2021/using-django-orm-only-without-web-server-1oc8
-
+"""
+Loads nascar tracks into beerme3.db_track
+If the track name is aready in the database, it is skipped.
+"""
 import os
 
 ##############################
@@ -269,16 +272,12 @@ for track in tracks:
     try:
         # print(track)
         track.save()
-        print(f"{track.id}: {track.name} added!")
+        print(f"{track.id}: {track.name} Added!")
+        # track.delete()
     except Exception as e:
-        # print(e.__str__())
+        print(f"({track.short_name:16}) Already added!")
+        del track
         continue
 
-print("Saved!!")
-
-# track = Track()
-# track.name = 'EchoPark Speedway'
-# track.configuration = "paved quad oval"
-# track.state = "Georgia"
-# track.city = "Altanta"
-# track.length = 1.540
+print("Completed!!")
+exit(0)
