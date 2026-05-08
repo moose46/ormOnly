@@ -38,3 +38,25 @@ class Track(Base):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["name"], name="unique_name")]
+
+
+class Team(Base):
+    name = models.CharField(max_length=50, blank=False)
+
+
+class Driver(Base):
+    name = models.CharField(max_length=50, blank=False)
+    car_number = models.IntegerField(default=0)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+
+
+class Results(Base):
+    race_date = models.DateField()
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    start = models.IntegerField(default=0)
+    finish = models.IntegerField(default=0)
+    greg_picks = models.BooleanField(default=False)
+    bob_picks = models.BooleanField(default=False)
+    manufacturer = models.CharField(max_length=50)
+    led = models.IntegerField(default=0)
